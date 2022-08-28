@@ -73,4 +73,73 @@ def num_key(x):
     return t    
 ```
 Returns a matrix for the training set where for each key number in 0-9 the matrix respective contains 1 if the number is that key and otherwise 0 
+## Training
+### Forward Propagation:
+```bash
+def forward(self, x, W1, b1, W2, b2):
+        self.x = x
+        self.W2 = W2
+        self.A1 = np.dot(self.x, W1) + b1
+        self.Z1 = relu(self.A1)
+        self.A2 = np.dot(self.Z1, W2) + b2
+        self.Y = softmax(self.A2)
+```
+For the hidden layer ReLU activation function is used  
+For the final layer softmax activation function is used
+### Backward Propagation:
+```bash
+    def backward(self, t):
+        self.T = num_key(t)
+        m = self.T.size
+        dA2 = (self.Y - self.T) / m
+        dW2 = np.dot(self.Z1.T, dA2)
+        db2 = np.sum(dA2, axis = 0)    
+        dZ1 = np.dot(dA2, self.W2.T)
+        dA1 = dZ1 * relu(self.Z1) 
+        db1 = np.sum(dA1, axis = 0) 
+        dW1 = np.dot(self.x.T, dA1)
+  ```
+  The derivatives are calculated
+  ### Updating:
+  ```bash
+  ef update(W1, b1, W2, b2, dW1, dW2, db1, db2, learning_rate):
+    db1.reshape(1, db1.size)
+    db2.reshape(1, db2.size)
+    lr = learning_rate
+    W1 = W1 - lr * dW1
+    W2 = W2 - lr * dW2
+    b1 = b1 - lr * db1
+    b2 = b2 - lr * db2
+    
+    return W1, b1, W2, b2
+```
+The parameters are updated
+### Training the parameters:
+```bash
+def train_network(x, t, iter, learning_rate):
+    W1, b1, W2, b2 = init_params()
+    prop = propagation()
+    
+    for i in range(iter):
+        Y = prop.forward(x, W1, b1, W2, b2)
+        dW1, dW2, db1, db2 = prop.backward(t)
+        W1, b1, W2, b2 = update(W1, b1, W2, b2, dW1, dW2, db1, db2, learning_rate)
+        if (i%10 == 0):
+            print('iteration: ', i)
+            print('accuracy: ', accuracy(Y, t))
+ ```
+ ## Predicting:
+ ```bash
+ def prediction(Y):
+    return np.argmax(Y, axis = 1)
+```
+For a new input number, predicting it
+ ## Accuracy:
+ ```bash
+ def accuracy(Y, t):
+    K = prediction(Y)
+    t.reshape(1, t.size)
+    return np.sum(K == t) / K.size
+```
+Measuring the accuracy of the model
 
