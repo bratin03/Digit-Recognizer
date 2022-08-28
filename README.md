@@ -143,4 +143,6 @@ For a new input number, predicting it
 ```
 Measuring the accuracy of the model
 # Results:
-
+### 500 Iterations: 0.91621 Accuracy
+### 1000 Iterations: 0.91742 Accuracy
+### 2000 Iterations: 0.92353 Accuracy
