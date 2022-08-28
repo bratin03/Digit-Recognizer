@@ -18,7 +18,7 @@ m, n=data.shape
 x_val = data[:val_num, 1:]
 t_val = data[:val_num, 0]
 x_train = data[val_num: , 1:]
-t_train = data[val_num: , 0]![nn](https://user-images.githubusercontent.com/109758341/187070142-aab70124-19ff-4b5a-a324-16c568fe2f4c.png)
+t_train = data[val_num: , 0]
 
 ```
 Here we divide the given dataset into a test and validation set in 80:20 ratio.
