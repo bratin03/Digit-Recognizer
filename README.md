@@ -29,3 +29,16 @@ Here we divide the given dataset into a test and validation set in 80:20 ratio.
 Input: 784 pixel values of the image  
 Hidden Layer: Consists of 10 units  
 Output: Prediction Value corresponding to each digit 0-9  
+
+## Initialization:
+```bash
+def init_params():
+    W1 = np.random.randn(784, 10) *0.01
+    b1 = np.zeros((1,10))
+    W2 = np.random.randn(10, 10) *0.01
+    b2 = np.zeros((1,10))
+    
+    return W1, b1, W2, b2
+```
+b1,b2: Zero Initialization  
+W1,W2: Random Initialization(This serves the process of symmetry-breaking and gives much better accuracy. In this method, the weights are initialized very close to zero, but randomly.)
