@@ -62,4 +62,15 @@ def softmax(x):
     return np.exp(x) / np.sum(np.exp(x))
 ```
 ![softmax](https://user-images.githubusercontent.com/109758341/187070938-b4547d0a-29f2-4605-92bd-96d68253f77d.png)
+### Num_key:
+```bash
+def num_key(x):
+    x.reshape(1, x.size)
+    batch_size = len(x)
+    t = np.zeros((batch_size, 10))
+    t[np.arange(batch_size), x] = 1
+    
+    return t    
+```
+Returns a matrix for the training set where for each key number in 0-9 the matrix respective contains 1 if the number is that key and otherwise 0 
 
