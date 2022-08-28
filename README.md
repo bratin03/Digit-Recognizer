@@ -142,5 +142,3 @@ For a new input number, predicting it
     return np.sum(K == t) / K.size
 ```
 Measuring the accuracy of the model
-# Results:
-
