@@ -42,3 +42,24 @@ def init_params():
 ```
 b1,b2: Zero Initialization  
 W1,W2: Random Initialization(This serves the process of symmetry-breaking and gives much better accuracy. In this method, the weights are initialized very close to zero, but randomly.)
+
+## Functions:
+### ReLU:
+```bash
+def relu(x):
+    return np.maximum(0, x)
+```
+![RELU](https://user-images.githubusercontent.com/109758341/187070794-0942d1c3-4d04-405d-858d-a3838fa6a89f.png)
+### Softmax:
+```bash
+def softmax(x):
+    if x.ndim == 2:
+        x = x.T
+        x = x - np.max(x, axis=0)
+        y = np.exp(x) / np.sum(np.exp(x), axis=0)
+        return y.T 
+    x = x - np.max(x) 
+    return np.exp(x) / np.sum(np.exp(x))
+```
+![softmax](https://user-images.githubusercontent.com/109758341/187070938-b4547d0a-29f2-4605-92bd-96d68253f77d.png)
+
