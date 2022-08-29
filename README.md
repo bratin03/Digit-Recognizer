@@ -95,14 +95,14 @@ For the final layer softmax activation function is used
         dW2 = np.dot(self.Z1.T, dA2)
         db2 = np.sum(dA2, axis = 0)    
         dZ1 = np.dot(dA2, self.W2.T)
-        dA1 = dZ1 * relu(self.Z1) 
+        dA1 = dZ1 * np.array(self.Z1 > 0, dtype=int) 
         db1 = np.sum(dA1, axis = 0) 
         dW1 = np.dot(self.x.T, dA1)
   ```
   The derivatives are calculated
   ### Updating:
   ```bash
-  ef update(W1, b1, W2, b2, dW1, dW2, db1, db2, learning_rate):
+  def update(W1, b1, W2, b2, dW1, dW2, db1, db2, learning_rate):
     db1.reshape(1, db1.size)
     db2.reshape(1, db2.size)
     lr = learning_rate
